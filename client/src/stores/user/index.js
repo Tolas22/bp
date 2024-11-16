@@ -1,20 +1,41 @@
 import { defineStore } from 'pinia'
+import axios from "axios";
 export const useUserStore = defineStore('user', {
   state: () => ({
-    loggedIn: false
+    loggedIn: false,
+    token: null,
+    error: null
   }),
   getters: {
     isLoggedIn: state => {
-      let loggedIn = window.localStorage.getItem('loggedIn')
-      return loggedIn || state.loggedIn
+      return state.loggedIn || !!state.token
     }
   },
   actions: {
-    login(callback) {
-      this.loggedIn = true
-      window.localStorage.setItem('loggedIn', 'true')
-      // ACTIVATE CALLBACK WITH THE LOGIN STATUS
-      callback(true)
+    async login(credentials, callback) {
+      try {
+        console.log(credentials)
+        const response = await axios.post('/api/login', JSON.stringify(credentials),
+            {headers: {
+              "Content-Type": 'application/json'
+              }})
+        console.log(response.data)
+        this.token = response.data.access_token
+        this.loggedIn = true
+        localStorage.setItem('token', this.token)
+        callback();
+      } catch (error) {
+        this.error = error.response
+        console.error('Login failed:', error.response.data)
+        return false
+      }
+  },
+    initializeAuth() {
+      const token = localStorage.getItem('token')
+      if (token) {
+        this.token = token
+        this.loggedIn = true
+      }
     }
   }
 })

@@ -6,7 +6,7 @@ import { useUserStore } from '@/stores/user'
 
 const isLoggedIn = () => {
   const store = useUserStore()
-
+  store.initializeAuth()
   return store.isLoggedIn
 }
 

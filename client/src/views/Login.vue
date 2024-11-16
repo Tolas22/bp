@@ -18,7 +18,7 @@ export default {
     submit(credentials) {
       console.log('credentials', credentials)
       const store = useUserStore()
-      store.login(() => {
+      store.login(credentials, () => {
         this.$router.push({ name: 'home' })
       })
     }
@@ -41,7 +41,7 @@ export default {
   width: 100%;
   max-width: 782px;
   background: #fff;
-  box-shadow: 0px 4px 4px 3px rgba(185, 185, 185, 0.2509803922);
+  box-shadow: 0 4px 4px 3px rgba(185, 185, 185, 0.2509803922);
   flex-direction: column;
   padding: 35px 0;
   height: -webkit-fill-available;

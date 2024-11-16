@@ -1,7 +1,8 @@
 <template>
   <form class="login_form" @submit.prevent="submit">
-    <BaseInput v-model="userName" label="Username" />
+    <BaseInput v-model="email" label="Username" />
     <BaseInput v-model="password" label="Password" type="password" />
+    <span v-if="store.error" class="error">{{ store.error.data.message }}</span>
     <BaseButton type="submit" fullWidth>Log in</BaseButton>
   </form>
 </template>
@@ -10,6 +11,7 @@
 // COMPONENTS
 import BaseInput from '@/components/base/input/BaseInput.vue'
 import BaseButton from '@/components/base/button/BaseButton.vue'
+import {useUserStore} from "@/stores/user/index.js";
 
 export default {
   name: 'LoginForm',
@@ -20,18 +22,19 @@ export default {
   },
   data() {
     return {
-      userName: '',
-      password: ''
+      email: '',
+      password: '',
+      store: useUserStore()
     }
   },
   methods: {
     submit() {
       console.log('submit', {
-        userName: this.userName,
+        email: this.email,
         password: this.password
       })
       this.$emit('submit', {
-        userName: this.userName,
+        email: this.email,
         password: this.password
       })
     }
@@ -49,5 +52,8 @@ export default {
   gap: 20px;
   color: $ESSENTIALS_BLUE2;
   margin-block-start: 50px;
+}
+.error {
+  color: red;
 }
 </style>

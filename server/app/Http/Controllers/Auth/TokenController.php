@@ -30,7 +30,10 @@ class TokenController extends Controller
      */
     public function login(LoginRequest $request)
     {
-        $credentials = $request->only('email', 'password');
+        $credentials = $request->validate([
+            'email' => 'required|email',
+            'password' => 'required'
+        ]);
         if (!Auth::attempt($credentials)) {
             return response()->json(['message' => 'Invalid login details'], 401);
         }
