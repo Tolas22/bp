@@ -1,6 +1,6 @@
-.PHONY: all check_composer install_composer check_env update_env serve install_client_deps check_client_deps serve_client
+.PHONY: all check_composer install_composer check_env update_env run_sql_script serve install_client_deps check_client_deps serve_client
 
-all: check_composer install_composer_packages check_env update_env serve install_client_deps check_client_deps serve_client
+all: check_composer install_composer_packages check_env update_env run_sql_script serve install_client_deps check_client_deps serve_client
 
 # Check if composer is installed
 check_composer:
@@ -19,6 +19,10 @@ check_env:
 # Update .env with current path
 update_env:
 	@path=$$(pwd) && sed -i '' "s|DB_DATABASE=.*|DB_DATABASE=$$path\/server\/database\/database.sqlite|" ./server/.env
+
+# Execute the SQL script
+run_sql_script:
+	cd ./server/database && sqlite3 database.sqlite < sqlscript.sql
 
 # Run php artisan serve
 serve:

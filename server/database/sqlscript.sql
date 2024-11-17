@@ -1,3 +1,8 @@
+-- Drop Tables if exist
+DROP TABLE IF EXISTS quizzes;
+DROP TABLE IF EXISTS questions;
+DROP TABLE IF EXISTS answers;
+
 -- Create the quiz table
 CREATE TABLE quizzes (
                          id INTEGER PRIMARY KEY AUTOINCREMENT,

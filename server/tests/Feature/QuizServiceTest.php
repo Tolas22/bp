@@ -8,10 +8,10 @@ use App\Services\QuizService;
 use App\Models\Quiz;
 use App\Models\Question;
 use App\Models\Answer;
+use Illuminate\Support\Facades\DB;
 
 class QuizServiceTest extends TestCase
 {
-    use RefreshDatabase;
 
     protected $quizService;
 
@@ -19,6 +19,9 @@ class QuizServiceTest extends TestCase
     {
         parent::setUp();
         $this->quizService = new QuizService();
+        DB::statement('PRAGMA foreign_keys = OFF;');
+        $sqlScript = file_get_contents(database_path('../database/sqlscript.sql'));
+        DB::unprepared($sqlScript);
     }
 
     public function testGetQuiz()
@@ -32,5 +35,11 @@ class QuizServiceTest extends TestCase
         $this->assertEquals($quiz->id, $result->id);
         $this->assertEquals($question->id, $result->questions[0]->id);
         $this->assertEquals($answer->id, $result->questions[0]->answers[0]->id);
+    }
+
+    protected function tearDown(): void
+    {
+        parent::tearDown();
+        DB::statement('PRAGMA foreign_keys = ON;');
     }
 }

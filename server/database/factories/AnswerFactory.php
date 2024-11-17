@@ -17,7 +17,8 @@ class AnswerFactory extends Factory
     public function definition(): array
     {
         return [
-            //
+            'answer' => $this->faker->word,
+            'question_id' => 1,
         ];
     }
 }

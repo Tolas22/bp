@@ -19,7 +19,7 @@ export const useUserStore = defineStore('user', {
             {headers: {
               "Content-Type": 'application/json'
               }})
-        console.log(response.data)
+        // set token for server requests
         this.token = response.data.access_token
         this.loggedIn = true
         localStorage.setItem('token', this.token)

@@ -66,7 +66,7 @@ export default {
           // Check the response status
           if (!response.ok) {
             if (response.status === 401) {
-              console.log('Unauthorized access');
+              //logout user if token expired
               localStorage.removeItem('token');
               store.token = null;
               this.$router.push({ name: 'login' });
@@ -74,9 +74,8 @@ export default {
             }
             throw new Error(`HTTP error! status: ${response.status}`);
           }
-
-          const data = await response.json();
-          this.quiz = data;
+          //set data to quiz
+          this.quiz = await response.json();;
           console.log('Received data:', this.quiz);
         }
       } catch (error) {
