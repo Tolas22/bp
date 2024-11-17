@@ -16,7 +16,6 @@ export default {
   },
   methods: {
     submit(credentials) {
-      console.log('credentials', credentials)
       const store = useUserStore()
       store.login(credentials, () => {
         this.$router.push({ name: 'home' })

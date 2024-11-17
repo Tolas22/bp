@@ -75,7 +75,7 @@ export default {
             throw new Error(`HTTP error! status: ${response.status}`);
           }
           //set data to quiz
-          this.quiz = await response.json();;
+          this.quiz = await response.json();
           console.log('Received data:', this.quiz);
         }
       } catch (error) {

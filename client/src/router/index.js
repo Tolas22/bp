@@ -18,7 +18,6 @@ const router = createRouter({
       name: 'home',
       redirect: () => {
         if (isLoggedIn()) {
-          console.log()
           return '/feature/quiz'
         } else {
           return '/login'

@@ -29,10 +29,6 @@ export default {
   },
   methods: {
     submit() {
-      console.log('submit', {
-        email: this.email,
-        password: this.password
-      })
       this.$emit('submit', {
         email: this.email,
         password: this.password

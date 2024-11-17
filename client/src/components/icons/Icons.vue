@@ -17,7 +17,7 @@ import TimesCircle from '@/assets/times_circle.svg?component';
 // in charge of the icons output
 const props = defineProps({
   visible: Boolean,
-  isCorrect: Boolean,
+  isCorrect: Number,
 });
 
 const iconComponent = computed(() => {

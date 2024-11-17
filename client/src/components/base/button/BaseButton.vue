@@ -55,7 +55,6 @@ export default {
           border:  '2px solid #008080'
         },
       }
-      console.log(this.theme)
       const type = this.theme.toUpperCase() || THEMES.PRIMARY
       return theme[type]
     }

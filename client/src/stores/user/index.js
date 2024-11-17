@@ -14,7 +14,6 @@ export const useUserStore = defineStore('user', {
   actions: {
     async login(credentials, callback) {
       try {
-        console.log(credentials)
         const response = await axios.post('/api/login', JSON.stringify(credentials),
             {headers: {
               "Content-Type": 'application/json'
