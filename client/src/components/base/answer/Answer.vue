@@ -1,5 +1,5 @@
 <script setup>
-import Icons from "@/components/icons/Icons.vue";
+
 
 const props = defineProps({
   answer: String,
@@ -22,11 +22,10 @@ const props = defineProps({
               'incorrect': results && selected && !correct
             }"
             @click="$emit('select')"
-            :disabled="results">
+            >
       <span class="answer-letter" :class="{'letter-selected':selected}">{{ letter }}</span>
       <span class="answer-text">{{ answer }}</span>
     </button>
-    <Icons v-if="results && selected" :is-correct="correct" :visible="true" />
   </div>
 </template>
 
@@ -39,7 +38,7 @@ const props = defineProps({
 .answer-button {
   display: flex;
   align-items: center;
-  width: 100%;
+  width: 50px;
   background-color: white;
   border: 1px solid #ddd;
   box-shadow: 1px 2px 4px rgba(0, 0, 0, 0.1);
@@ -93,10 +92,12 @@ const props = defineProps({
 
 .correct {
   border: 2px solid green;
+  background-color: #f1fff0;
 }
 
 .incorrect {
   border: 2px solid red;
+  background-color: #fdf7f7;
 }
 
 .letter-selected {
@@ -104,10 +105,4 @@ const props = defineProps({
   border: solid 2px #048281;
 }
 
-.icons {
-  position: absolute;
-  right: 10px;
-  top: 50%;
-  transform: translateY(-50%);
-}
 </style>

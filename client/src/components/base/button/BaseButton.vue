@@ -38,14 +38,24 @@ export default {
         [THEMES.PRIMARY]: {
           bg: '#137996',
           hover: '#0c576c',
-          color: '#fff'
+          color: '#fff',
+          border: 'none'
         },
         [THEMES.SECONDARY]: {
           bg: '#008080',
           hover: '#006666',
-          color: '#fff'
-        }
+          color: '#fff',
+          border: 'none'
+        },
+        // added inverted theme
+        [THEMES.INVERTED]: {
+          bg: '#fff',
+          hover: '#006666',
+          color: '#008080',
+          border:  '2px solid #008080'
+        },
       }
+      console.log(this.theme)
       const type = this.theme.toUpperCase() || THEMES.PRIMARY
       return theme[type]
     }
@@ -57,10 +67,10 @@ export default {
 @import '@/utilities/css/vars/vars.scss';
 button {
   background-color: v-bind('themeObj.bg');
-  color: $WHITE;
+  color: v-bind('themeObj.color');
   font-size: large;
   font-family: $FONT_BOLD;
-  border: none;
+  border: v-bind('themeObj.border');
   border-radius: 5px;
   padding: 10px 20px;
   cursor: pointer;

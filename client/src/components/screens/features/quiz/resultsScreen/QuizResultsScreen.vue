@@ -55,13 +55,24 @@ const props = defineProps({
 
 
 .results {
-  margin-top: 75px;
+  margin-top: 120px;
   flex: 1;
   padding: 20px;
 
 }
 .result {
-  border-bottom: 1px solid grey;
+  position: relative;
   width: 100%;
+  padding-bottom: 1px;
+}
+.result::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  width: 100vw;
+  height: 1px;
+  background-color: grey;
+  transform: translateX(-50%);
 }
 </style>

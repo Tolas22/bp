@@ -11,9 +11,9 @@
   </div>
   <div class="footer">
     <div class="navigation-buttons">
-      <BaseButton v-if="questionIndex> 0" @click="back">Back</BaseButton>
+      <BaseButton v-if="questionIndex> 0" :theme="BUTTON_THEMES.INVERTED" @click="back">Back</BaseButton>
       <BaseButton v-if="questionIndex < quiz.questions.length - 1" :theme="BUTTON_THEMES.SECONDARY" @click="next">Next</BaseButton>
-      <BaseButton v-else :theme="BUTTON_THEMES.PRIMARY" @click="$emit('submitQuiz')">Submit</BaseButton>
+      <BaseButton v-else :theme="BUTTON_THEMES.SECONDARY" @click="$emit('submitQuiz')">Submit</BaseButton>
     </div>
   </div>
 </template>

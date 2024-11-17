@@ -1,5 +1,6 @@
 <script setup>
 import Answer from "@/components/base/answer/Answer.vue";
+import Icons from "@/components/icons/Icons.vue";
 
 const props = defineProps({
   quiz: Object,
@@ -31,6 +32,7 @@ const selectAnswer = (answer) => {
                 :correct="answer.is_correct"
                 :results="results"
                 @select="selectAnswer(answer)"></Answer>
+        <Icons v-if="results && answer.selected" :is-correct="answer.is_correct" :visible="true" />
       </li>
     </ul>
   </div>
@@ -46,4 +48,36 @@ const selectAnswer = (answer) => {
   font-size: 2rem;
   margin-right: 1rem;
 }
+.questions {
+  width: 90%;
+}
+
+ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+li {
+  display: flex;
+  position: relative;
+  margin-bottom: 10px;
+}
+
+.answer-container {
+  width: 100%;
+}
+
+.answer-button {
+  width: 100%;
+  padding: 10px;
+  text-align: left;
+}
+
+.result-icon {
+  position: absolute;
+  right: -30px;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
 </style>

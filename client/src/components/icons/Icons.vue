@@ -1,43 +1,38 @@
 <template>
-  <img
+  <component
+      :is="iconComponent"
       v-if="props.visible"
-      :class="{'result-icon': true}"
-      :src="iconSrc"
-      :alt="isCorrect ? 'Correct' : 'Incorrect'"
-      :style="iconStyle"
-      class="result-icon"
+      :class="['result-icon',
+      props.isCorrect ? 'result-icon-success' : 'result-icon-fail'
+      ]"
+      :aria-label="isCorrect ? 'Correct' : 'Incorrect'"
+      role="img"
   />
 </template>
 
 <script setup>
 import { computed } from 'vue';
+import CheckCircle from '@/assets/check_circle.svg?component';
+import TimesCircle from '@/assets/times_circle.svg?component';
 // in charge of the icons output
 const props = defineProps({
   visible: Boolean,
   isCorrect: Boolean,
 });
 
-const iconSrc = computed(() => {
-  return props.isCorrect
-      ? new URL('@/assets/check_circle.svg', import.meta.url).href
-      : new URL('@/assets/times_circle.svg', import.meta.url).href;
+const iconComponent = computed(() => {
+  return props.isCorrect ? CheckCircle : TimesCircle;
 });
 
-// calculates the icon color
-const iconStyle = computed(() => {
-  return {
-    fill: props.isCorrect ? 'green' : 'red',
-  };
-});
 </script>
 
 <style scoped>
-.result-icon-success svg{
-  fill: green;
+.result-icon-success {
+  color: green;
 }
 
-.result-icon-fail svg{
-  fill: red;
+.result-icon-fail {
+  color: red;
 }
 .result-icon {
   width: 20px;

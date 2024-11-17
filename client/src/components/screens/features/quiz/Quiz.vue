@@ -58,20 +58,30 @@ export default {
             'Accept': 'application/json',
             'Authorization': `Bearer ${token}`
           };
-          fetch('/api/getQuiz', {
+          const response = await fetch('/api/getQuiz', {
             method: 'GET',
             headers: headers
-          })
-              .then(response => response.json())
-              .then(data => {
-                this.quiz = data;
-                console.log('Received data:', this.quiz);
-              });
+          });
+
+          // Check the response status
+          if (!response.ok) {
+            if (response.status === 401) {
+              console.log('Unauthorized access');
+              localStorage.removeItem('token');
+              store.token = null;
+              this.$router.push({ name: 'login' });
+              return;
+            }
+            throw new Error(`HTTP error! status: ${response.status}`);
+          }
+
+          const data = await response.json();
+          this.quiz = data;
+          console.log('Received data:', this.quiz);
         }
       } catch (error) {
         console.error("Could not fetch quiz:", error);
       }
-
     },
     submitQuiz() {
       this.quiz.questions.forEach(question => {
@@ -90,5 +100,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-
+.quiz_container{
+  width: 40%;
+}
 </style>
