@@ -33,4 +33,5 @@ Project Structure:
 1. The new components I created are built with the Vue Composition API. I used the Options API where it was already used.
 2. Since the database was already migrated in the file, I used a sql script to create my tables and seed them
 I added a command in the Make file to run this script.
-3. It was an interesting and fun project, I learned a lot. Thanks for the opportunity.
+3. The default user credentials are in the app service provider. (credentials will not usually be pushed to git)
+4. It was an interesting and fun project, I learned a lot. Thanks for the opportunity.
